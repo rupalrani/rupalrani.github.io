@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rupal Rani · Data Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:    #0d9488;
+      --teal-dk: #0f766e;
+      --teal-lt: #ccfbf1;
+      --slate:   #1e293b;
+      --muted:   #64748b;
+      --border:  #e2e8f0;
+      --bg:      #f8fafc;
+      --card:    #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-brand { font-weight: 700; font-size: 1.1rem; color: var(--teal-dk); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f766e 0%, #0369a1 100%);
+      color: white;
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+    }
+    .hero-avatar {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 2.2rem; font-weight: 700; margin-bottom: 1.5rem;
+      border: 3px solid rgba(255,255,255,0.4);
+    }
+    .hero h1 { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.5px; }
+    .hero-subtitle {
+      font-size: 1.05rem; font-weight: 400; opacity: 0.88;
+      margin: 0.5rem 0 1.5rem;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; }
+    .hero-tag {
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px; padding: 0.25rem 0.85rem;
+      font-size: 0.82rem; font-weight: 500;
+    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.4rem; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all .2s;
+    }
+    .btn-white  { background: white; color: var(--teal-dk); }
+    .btn-white:hover  { background: var(--teal-lt); }
+    .btn-ghost  { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.4); }
+    .btn-ghost:hover  { background: rgba(255,255,255,0.25); }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 0.4rem;
+    }
+    h2 { font-size: 1.8rem; font-weight: 700; color: var(--slate); margin-bottom: 2rem; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.97rem; }
+    .about-text strong { color: var(--slate); }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.2rem; text-align: center;
+    }
+    .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--teal); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; gap: 1.5rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.6rem; transition: box-shadow .2s, border-color .2s;
+      display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: start;
+    }
+    .project-card:hover { box-shadow: 0 4px 24px rgba(13,148,136,0.12); border-color: var(--teal); }
+    .project-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .project-body h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .project-body p  { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.5; }
+    .result-pill {
+      display: inline-block; background: var(--teal-lt); color: var(--teal-dk);
+      border-radius: 6px; padding: 0.18rem 0.6rem;
+      font-size: 0.78rem; font-weight: 600; margin-bottom: 0.7rem;
+    }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tech-tag {
+      background: #f1f5f9; color: var(--slate);
+      border-radius: 5px; padding: 0.15rem 0.55rem;
+      font-size: 0.75rem; font-weight: 500;
+    }
+    .project-link {
+      flex-shrink: 0; color: var(--teal); text-decoration: none;
+      font-size: 0.82rem; font-weight: 600; white-space: nowrap;
+      display: flex; align-items: center; gap: 0.2rem;
+    }
+    .project-link:hover { color: var(--teal-dk); }
+    .p1 { background: #ffe4e6; } .p2 { background: #dbeafe; }
+    .p3 { background: #dcfce7; } .p4 { background: #fef9c3; }
+
+    /* ── EXPERIENCE ── */
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.6rem; margin-bottom: 1rem;
+    }
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    .exp-title { font-weight: 600; font-size: 1rem; }
+    .exp-org   { color: var(--teal); font-weight: 500; font-size: 0.92rem; }
+    .exp-date  { font-size: 0.82rem; color: var(--muted); background: #f1f5f9; padding: 0.2rem 0.7rem; border-radius: 20px; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li { font-size: 0.88rem; color: var(--muted); padding: 0.25rem 0; padding-left: 1.1rem; position: relative; }
+    .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); }
+
+    /* ── RESEARCH ── */
+    .research-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    .research-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.2rem;
+    }
+    .research-card h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .research-card p  { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .skill-group { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; }
+    .skill-group h4 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--teal); margin-bottom: 0.7rem; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .chip {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 6px; padding: 0.2rem 0.55rem;
+      font-size: 0.78rem; color: var(--slate);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--slate); color: rgba(255,255,255,0.7);
+      text-align: center; padding: 2.5rem 1rem;
+      font-size: 0.85rem;
+    }
+    footer a { color: #5eead4; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 680px) {
+      .hero h1 { font-size: 1.9rem; }
+      .about-grid, .research-grid { grid-template-columns: 1fr; }
+      .project-card { grid-template-columns: auto 1fr; }
+      .project-link { grid-column: 1/-1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Rupal Rani</span>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-avatar">RR</div>
+  <h1>Rupal Rani</h1>
+  <p class="hero-subtitle">Data Analyst · Sustainability & Development Research · TISS Mumbai '26</p>
+  <div class="hero-tags">
+    <span class="hero-tag">Labour Economics</span>
+    <span class="hero-tag">Climate Finance</span>
+    <span class="hero-tag">ESG Analytics</span>
+    <span class="hero-tag">Supply Chain</span>
+    <span class="hero-tag">Python · SQL · Power BI · Tableau</span>
+  </div>
+  <div class="hero-cta">
+    <a class="btn btn-white" href="https://github.com/rupalrani" target="_blank">⭐ GitHub</a>
+    <a class="btn btn-ghost" href="https://www.linkedin.com/in/rupal-rani-a23b36257" target="_blank">💼 LinkedIn</a>
+    <a class="btn btn-ghost" href="mailto:rupalrani2303@gmail.com">✉️ Email</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <h2>Turning Data into Decisions</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a final-year <strong>BS Analytics & Sustainability Studies</strong> student at <strong>TISS Mumbai</strong> (Reliance Foundation Scholar) with hands-on experience as a Data Analyst at <strong>Aajeevika Bureau's India LabourLine</strong>, where I cleaned 5-year national MIS databases and built Power BI dashboards for migrant labour analytics.</p>
+      <p>My work sits at the intersection of <strong>data science and social impact</strong> — from quantifying India's gender wage gap using PLFS microdata, to building ESG benchmarking tools aligned to IFRS S1/S2 and TCFD, to mapping climate-risk hotspots from EM-DAT district-level data.</p>
+      <p>I'm actively seeking roles in <strong>Data Analytics, Climate Finance, and Development Research</strong>.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">End-to-End Projects</div></div>
+      <div class="stat-card"><div class="stat-num">180K+</div><div class="stat-label">Orders Analysed</div></div>
+      <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Power BI Dashboards</div></div>
+      <div class="stat-card"><div class="stat-num">1,200+</div><div class="stat-label">MIS Records Cleaned</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Portfolio</div>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon p1">📦</div>
+      <div class="project-body">
+        <h3>Supply Chain Control Tower Dashboard</h3>
+        <div class="result-pill">AUC 0.81 · 180,519 Orders · 5 Global Markets</div>
+        <p>End-to-end supply chain analytics using the DataCo dataset. Built a late-delivery prediction model and an interactive Power BI control tower dashboard. Backed by a 12,000-word academic report with 72 APA 7 references.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">SQL</span>
+          <span class="tech-tag">Power BI</span><span class="tech-tag">XGBoost</span>
+          <span class="tech-tag">Scikit-learn</span>
+        </div>
+      </div>
+      <a class="project-link" href="https://github.com/rupalrani/supply-chain-control-tower" target="_blank">View →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon p2">🎯</div>
+      <div class="project-body">
+        <h3>Recruitment Channel Effectiveness Analytics</h3>
+        <div class="result-pill">ANOVA · Regression · Cost-per-Hire · Yield Ratio</div>
+        <p>Statistical analysis of sourcing channels using ANOVA and OLS regression across cost-per-hire, yield ratio, performance, and satisfaction metrics to identify the highest-ROI recruitment strategies.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">SQL</span>
+          <span class="tech-tag">ANOVA</span><span class="tech-tag">Statsmodels</span>
+          <span class="tech-tag">Seaborn</span>
+        </div>
+      </div>
+      <a class="project-link" href="https://github.com/rupalrani/recruitment-channel-analytics" target="_blank">View →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon p3">🌿</div>
+      <div class="project-body">
+        <h3>ESG Performance Benchmarking Tool</h3>
+        <div class="result-pill">Sector explains ~40% of ESG variance · IFRS S1/S2 · TCFD · GRI</div>
+        <p>Sector-relative ESG scoring framework for S&P 500 firms using Sustainalytics + Yahoo Finance data. Aligned to IFRS S1/S2, TCFD, and GRI. Includes a journal paper draft targeted at <em>Finance Research Letters</em>.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">SQL</span>
+          <span class="tech-tag">Power BI</span><span class="tech-tag">yfinance</span>
+          <span class="tech-tag">OLS Regression</span>
+        </div>
+      </div>
+      <a class="project-link" href="https://github.com/rupalrani/esg-benchmarking-tool" target="_blank">View →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon p4">🏛️</div>
+      <div class="project-body">
+        <h3>Labour Market Intelligence Dashboard</h3>
+        <div class="result-pill">Mincer Regression · Blinder-Oaxaca · PLFS India</div>
+        <p>PLFS-based labour market analytics system. Estimates private returns to schooling via Mincer regression and decomposes India's gender wage gap into explained and unexplained components using Blinder-Oaxaca decomposition.</p>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">SQL</span>
+          <span class="tech-tag">Tableau</span><span class="tech-tag">Statsmodels</span>
+          <span class="tech-tag">Econometrics</span>
+        </div>
+      </div>
+      <a class="project-link" href="https://github.com/rupalrani/labour-market-intelligence" target="_blank">View →</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <h2>Work</h2>
+
+  <div class="exp-card">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Data Analyst Intern</div>
+        <div class="exp-org">Aajeevika Bureau — India LabourLine, Mumbai</div>
+      </div>
+      <span class="exp-date">Jun 2025 – Aug 2025</span>
+    </div>
+    <ul class="exp-bullets">
+      <li>Cleaned and standardised a 5-year national workforce MIS database (Python + SQL + Excel), correcting 1,200+ inconsistent records</li>
+      <li>Automated ETL and reporting workflows, reducing turnaround from days to same-day delivery</li>
+      <li>Built 5+ Power BI dashboards tracking workforce operations, KPIs, and complaint resolution across migrant labour corridors</li>
+      <li>Presented analytics findings to leadership and external funders including Azim Premji Foundation</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">Academic & Field Research</div>
+  <h2>Research</h2>
+  <div class="research-grid">
+
+    <div class="research-card">
+      <h4>🌡️ Honours Dissertation</h4>
+      <p><strong>Loss & Damage from Extreme Climate Events in India (2000–2024)</strong><br/>
+      District-level multi-hazard risk index using EM-DAT, EM-DAT spatial analysis (Moran's I) and Mann–Kendall trend tests. Supervised by Dr. Praveen Kumar, TISS.</p>
+    </div>
+
+    <div class="research-card">
+      <h4>🏠 Urban Housing Study</h4>
+      <p><strong>Kanshiram Awas Yojana, Varanasi (2024)</strong><br/>
+      Mixed-methods study: 50 household surveys + 30 in-depth interviews; SDG-based assessment of housing outcomes under a state-funded scheme.</p>
+    </div>
+
+    <div class="research-card">
+      <h4>🌾 Climate-Resilient Farming</h4>
+      <p><strong>Women-Led Agriculture, Osmanabad (2023)</strong><br/>
+      Ethnographic research across 12 villages on women-led agroecological practices, gender roles in climate adaptation, and rural livelihoods.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Skills</div>
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>Programming</h4>
+      <div class="skill-chips">
+        <span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL/MySQL</span>
+        <span class="chip">Pandas</span><span class="chip">NumPy</span>
+        <span class="chip">Scikit-learn</span><span class="chip">Statsmodels</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>BI & Visualisation</h4>
+      <div class="skill-chips">
+        <span class="chip">Power BI</span><span class="chip">Tableau</span>
+        <span class="chip">Advanced Excel</span>
+        <span class="chip">Matplotlib</span><span class="chip">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Data Engineering</h4>
+      <div class="skill-chips">
+        <span class="chip">ETL Pipelines</span><span class="chip">Data Cleaning</span>
+        <span class="chip">Relational DBs</span><span class="chip">Data Validation</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h4>Research & GIS</h4>
+      <div class="skill-chips">
+        <span class="chip">QGIS</span><span class="chip">SPSS</span>
+        <span class="chip">Spatial Analysis</span>
+        <span class="chip">Survey Design</span><span class="chip">Econometrics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:0.5rem;">
+    <a href="mailto:rupalrani2303@gmail.com">rupalrani2303@gmail.com</a> ·
+    <a href="https://www.linkedin.com/in/rupal-rani-a23b36257" target="_blank">LinkedIn</a> ·
+    <a href="https://github.com/rupalrani" target="_blank">GitHub</a>
+  </p>
+  <p style="opacity:0.5; font-size:0.78rem; margin-top:0.5rem;">© 2026 Rupal Rani · TISS Mumbai</p>
+</footer>
+
+</body>
+</html>
